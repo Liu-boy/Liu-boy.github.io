@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>window 平台 git 配置多个账号的 ssh-key</title>
+    <link href="/2023/08/02/window-%E5%B9%B3%E5%8F%B0-git-%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E8%B4%A6%E5%8F%B7%E7%9A%84-ssh-key/"/>
+    <url>/2023/08/02/window-%E5%B9%B3%E5%8F%B0-git-%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E8%B4%A6%E5%8F%B7%E7%9A%84-ssh-key/</url>
+    
+    <content type="html"><![CDATA[<h1 id="window-平台-git-配置多个账号的-ssh-key"><a href="#window-平台-git-配置多个账号的-ssh-key" class="headerlink" title="window 平台 git 配置多个账号的 ssh-key"></a>window 平台 git 配置多个账号的 ssh-key</h1><h5 id="配置单个账号的-ssh-key"><a href="#配置单个账号的-ssh-key" class="headerlink" title="配置单个账号的 ssh-key"></a>配置单个账号的 ssh-key</h5><p>创建一个 gitlab 的 ssh-key</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -t rsa -C <span class="hljs-string">&quot;邮箱账号&quot;</span><br><span class="hljs-comment"># 然后一路按回车键</span><br></code></pre></td></tr></table></figure><p>然后会在: ~&#x2F;.ssh&#x2F; 目录下看到生成的秘钥文件, 密钥文件一般存放在: C:Usersusername.ssh 目录下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看秘钥</span><br><span class="hljs-built_in">cat</span> ~/.ssh/id_rsa<br></code></pre></td></tr></table></figure><p>把秘钥在 gitlab 上添加好了后, 验证是否配置成功</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ssh -T git@gitlab.com<br>Hi ****! You<span class="hljs-string">&#x27;ve successfully authenticated, but Gitlab does not provide shell access.</span><br></code></pre></td></tr></table></figure><h5 id="配置多个账号的-ssh-key"><a href="#配置多个账号的-ssh-key" class="headerlink" title="配置多个账号的 ssh-key"></a>配置多个账号的 ssh-key</h5><p>比如说在上一步的基础上, 再创建一个 github 的 ssh-key</p><p>第一步, 生成秘钥</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -t rsa -C <span class="hljs-string">&quot;邮箱账号&quot;</span><br><span class="hljs-comment"># 回车后会要求输入秘钥文件的名字, 为了作区分, 可以自己定义一个名字</span><br>Enter file <span class="hljs-keyword">in</span> <span class="hljs-built_in">which</span> to save the key (/c/Users/Gato/.ssh/id_rsa): github_private_id_rsa<br><span class="hljs-comment"># 然后一路按回车</span><br></code></pre></td></tr></table></figure><p>创建配置文件(命令行操作也可换成手动创建, 秘钥存放位置一般在 C:Usersusername.ssh 文件夹下)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 进入到秘钥文件夹下</span><br><span class="hljs-built_in">cd</span> ~/.ssh/<br><span class="hljs-comment"># 创建配置文件, 进入到 vim 编辑器 </span><br>vim config<br></code></pre></td></tr></table></figure><p>config 文件配置(IdentityFile 改成自己密钥文件的实际位置):</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># ~/.ssh/config 配置多个git的ssh-key</span><br><span class="hljs-comment"># 第一个默认的SSH Key</span><br>Host gitlab.com<br>HostName gitlab.com<br>IdentityFile C:Usersusername.sshid_rsa<br>PreferredAuthentications publickey<br><br><span class="hljs-comment"># 第二个SSH Key</span><br>Host github.com<br>HostName github.com<br>IdentityFile C:Usersusername.sshgitlab_private_id_rsa<br>PreferredAuthentications publickey<br></code></pre></td></tr></table></figure><p>验证是否配置成功</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ssh -T git@github.com<br>Hi ****! You<span class="hljs-string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Git</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>git高级</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>myblog1</title>
     <link href="/2023/08/02/myblog1/"/>
     <url>/2023/08/02/myblog1/</url>
@@ -55,31 +80,6 @@
   
   
   <entry>
-    <title>基于SpringBoot+Vue的学生选课管理系统</title>
-    <link href="/2023/08/01/springboot+vue%E5%AD%A6%E7%94%9F%E9%80%89%E8%AF%BE%E7%B3%BB%E7%BB%9F/"/>
-    <url>/2023/08/01/springboot+vue%E5%AD%A6%E7%94%9F%E9%80%89%E8%AF%BE%E7%B3%BB%E7%BB%9F/</url>
-    
-    <content type="html"><![CDATA[<h1 id="基于SpringBoot-Vue的学生选课管理系统"><a href="#基于SpringBoot-Vue的学生选课管理系统" class="headerlink" title="基于SpringBoot+Vue的学生选课管理系统"></a>基于SpringBoot+Vue的学生选课管理系统</h1><h4 id="1、项目介绍"><a href="#1、项目介绍" class="headerlink" title="1、项目介绍"></a>1、项目介绍</h4><p>基于SpringBoot+Vue的学生选课管理系统采用前后端分离的架构方式，系统分为管理员、老师、学生等三种角色， 权限分配如下</p><p>管理员拥有所有权限:</p><ul><li>学生管理：可以对所有学生进行管理操作（新增学生、修改学生、删除学生）</li><li>教师管理：可以对所有教师进行管理操作（新增教师、修改教师、删除教师）</li><li>课程管理：可以对所有课程进行管理操作（新增课程、修改课程、删除课程）</li><li>开课表管理：对已开课进行管理（删除开课，搜索）</li><li>学生成绩管理：查询所有学生成绩，成绩录入等操作</li></ul><p>教师拥有部分权限</p><ul><li>教师编辑：编辑教师本人的信息</li><li>课程设置：查看自己开设的课程，选择课程并开课</li><li>教师成绩管理：可以查看并录入学生成绩</li></ul><p>学生拥有部分权限</p><ul><li>学生编辑：编辑本人的信息</li><li>选课管理：学生可以进行选课，以及对已选则的课表进行查看</li><li>学生成绩管理：查询学生本人的成绩</li></ul><h4 id="2、技术选型"><a href="#2、技术选型" class="headerlink" title="2、技术选型"></a>2、技术选型</h4><p>项目运行环境：mysql5.7 + idea + node + windows10</p><p>服务端技术选型：SpringBoot + Mybatis + mysql</p><p>前端技术选型及js库：Vue + ElementUI + axios</p><h4 id="3、成果展示"><a href="#3、成果展示" class="headerlink" title="3、成果展示"></a>3、成果展示</h4><ul><li>登陆界面</li></ul><p><a href="https://imgse.com/i/pCmu9un"><img src="https://s1.ax1x.com/2023/06/13/pCmu9un.png" alt="pCmu9un.png"></a></p><ul><li>系统管理员登陆界面</li></ul><p><a href="https://imgse.com/i/pCmuCBq"><img src="https://s1.ax1x.com/2023/06/13/pCmuCBq.png" alt="pCmuCBq.png"></a></p><ul><li>教师登陆界面</li></ul><p><a href="https://imgse.com/i/pCmnzcj"><img src="https://s1.ax1x.com/2023/06/13/pCmnzcj.png" alt="pCmnzcj.png"></a></p><ul><li>学生登陆界面</li></ul><p><a href="https://imgse.com/i/pCmu9un"><img src="https://s1.ax1x.com/2023/06/13/pCmu9un.png" alt="pCmu9un.png"></a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>JavaWeb</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Springboot+vue</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>网上书城项目</title>
     <link href="/2023/08/01/%E5%8F%AE%E5%BD%93%E4%B9%A6%E5%9F%8E/"/>
     <url>/2023/08/01/%E5%8F%AE%E5%BD%93%E4%B9%A6%E5%9F%8E/</url>
@@ -122,6 +122,31 @@
     <tags>
       
       <tag>springboot+bootstrap</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>基于SpringBoot+Vue的学生选课管理系统</title>
+    <link href="/2023/08/01/springboot+vue%E5%AD%A6%E7%94%9F%E9%80%89%E8%AF%BE%E7%B3%BB%E7%BB%9F/"/>
+    <url>/2023/08/01/springboot+vue%E5%AD%A6%E7%94%9F%E9%80%89%E8%AF%BE%E7%B3%BB%E7%BB%9F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="基于SpringBoot-Vue的学生选课管理系统"><a href="#基于SpringBoot-Vue的学生选课管理系统" class="headerlink" title="基于SpringBoot+Vue的学生选课管理系统"></a>基于SpringBoot+Vue的学生选课管理系统</h1><h4 id="1、项目介绍"><a href="#1、项目介绍" class="headerlink" title="1、项目介绍"></a>1、项目介绍</h4><p>基于SpringBoot+Vue的学生选课管理系统采用前后端分离的架构方式，系统分为管理员、老师、学生等三种角色， 权限分配如下</p><p>管理员拥有所有权限:</p><ul><li>学生管理：可以对所有学生进行管理操作（新增学生、修改学生、删除学生）</li><li>教师管理：可以对所有教师进行管理操作（新增教师、修改教师、删除教师）</li><li>课程管理：可以对所有课程进行管理操作（新增课程、修改课程、删除课程）</li><li>开课表管理：对已开课进行管理（删除开课，搜索）</li><li>学生成绩管理：查询所有学生成绩，成绩录入等操作</li></ul><p>教师拥有部分权限</p><ul><li>教师编辑：编辑教师本人的信息</li><li>课程设置：查看自己开设的课程，选择课程并开课</li><li>教师成绩管理：可以查看并录入学生成绩</li></ul><p>学生拥有部分权限</p><ul><li>学生编辑：编辑本人的信息</li><li>选课管理：学生可以进行选课，以及对已选则的课表进行查看</li><li>学生成绩管理：查询学生本人的成绩</li></ul><h4 id="2、技术选型"><a href="#2、技术选型" class="headerlink" title="2、技术选型"></a>2、技术选型</h4><p>项目运行环境：mysql5.7 + idea + node + windows10</p><p>服务端技术选型：SpringBoot + Mybatis + mysql</p><p>前端技术选型及js库：Vue + ElementUI + axios</p><h4 id="3、成果展示"><a href="#3、成果展示" class="headerlink" title="3、成果展示"></a>3、成果展示</h4><ul><li>登陆界面</li></ul><p><a href="https://imgse.com/i/pCmu9un"><img src="https://s1.ax1x.com/2023/06/13/pCmu9un.png" alt="pCmu9un.png"></a></p><ul><li>系统管理员登陆界面</li></ul><p><a href="https://imgse.com/i/pCmuCBq"><img src="https://s1.ax1x.com/2023/06/13/pCmuCBq.png" alt="pCmuCBq.png"></a></p><ul><li>教师登陆界面</li></ul><p><a href="https://imgse.com/i/pCmnzcj"><img src="https://s1.ax1x.com/2023/06/13/pCmnzcj.png" alt="pCmnzcj.png"></a></p><ul><li>学生登陆界面</li></ul><p><a href="https://imgse.com/i/pCmu9un"><img src="https://s1.ax1x.com/2023/06/13/pCmu9un.png" alt="pCmu9un.png"></a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>JavaWeb</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Springboot+vue</tag>
       
     </tags>
     
