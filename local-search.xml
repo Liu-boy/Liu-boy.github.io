@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>wsl入门到精通</title>
+    <link href="/2023/08/03/wsl%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/"/>
+    <url>/2023/08/03/wsl%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/</url>
+    
+    <content type="html"><![CDATA[<h1 id="wsl入门"><a href="#wsl入门" class="headerlink" title="wsl入门"></a>wsl入门</h1><h5 id="wsl的基本命令"><a href="#wsl的基本命令" class="headerlink" title="wsl的基本命令"></a>wsl的基本命令</h5><p>以下 WSL 命令以 PowerShell 或 Windows 命令提示符支持的格式列出。 若要通过 Bash&#x2F;Linux 发行版命令行运行这些命令，必须将 wsl 替换为 wsl.exe。 若要获取完整的命令列表，请运行 wsl –help。</p><h6 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h6><p>安装 WSL 和 Linux 的默认 Ubuntu 发行版。 了解详细信息。 还可以使用此命令通过运行 wsl –install <Distribution Name> 来安装其他 Linux 发行版。 若要获取发行版名称的有效列表，请运行 wsl –list –online。</p><p>选项包括：</p><ul><li><code>--distribution</code>：指定要安装的 Linux 发行版。 可以通过运行 <code>wsl --list --online</code> 来查找可用的发行版。</li><li><code>--no-launch</code>：安装 Linux 发行版，但不自动启动它。</li><li><code>--web-download</code>：通过联机渠道安装，而不是使用 Microsoft Store 安装。</li></ul><p>未安装 WSL 时，选项包括：</p><ul><li>–inbox：使用 Windows 组件（而不是 Microsoft Store）安装 WSL。 （WSL 更新将通过 Windows 更新接收，而不是通过 Microsoft Store 中推送的可用更新来接收）</li><li>–enable-wsl1：在安装 Microsoft Store 版本的 WSL 的过程中也启用“适用于 Linux 的 Windows 子系统”可选组件，从而#启用 WSL 1。</li><li>–no-distribution：安装 WSL 时不安装发行版。</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl install<br></code></pre></td></tr></table></figure><h6 id="列出可用的-Linux-发行版"><a href="#列出可用的-Linux-发行版" class="headerlink" title="列出可用的 Linux 发行版"></a>列出可用的 Linux 发行版</h6><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--list</span> <span class="hljs-literal">--online</span><br></code></pre></td></tr></table></figure><h6 id="列出已安装的-Linux-发行版"><a href="#列出已安装的-Linux-发行版" class="headerlink" title="列出已安装的 Linux 发行版"></a>列出已安装的 Linux 发行版</h6><p>查看安装在 Windows 计算机上的 Linux 发行版列表，其中包括状态（发行版是正在运行还是已停止）和运行发行版的 WSL 版本（WSL 1 或 WSL 2）。 比较 WSL 1 和 WSL 2。 此命令也可输入为：wsl -l -v。 可与 list 命令一起使用的其他选项包括：–all（列出所有发行版）、–running（仅列出当前正在运行的发行版）或 –quiet（仅显示发行版名称）。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--list</span> <span class="hljs-literal">--verbose</span><br></code></pre></td></tr></table></figure><h6 id="将-WSL-版本设置为-1-或-2"><a href="#将-WSL-版本设置为-1-或-2" class="headerlink" title="将 WSL 版本设置为 1 或 2"></a>将 WSL 版本设置为 1 或 2</h6><p>#若要指定运行 Linux 发行版的 WSL 版本（1 或 2），请将 <distribution name> 替换为发行版的名称，并将 <versionNumber> 替换为 1 或 2。 比较 WSL 1 和 WSL 2。 WSL 2 仅在 Windows 11 或 Windows 10 版本 1903、内部版本 18362 或更高版本中可用</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--set-version</span> &lt;distribution name&gt; &lt;versionNumber&gt;<br></code></pre></td></tr></table></figure><h6 id="设置默认-WSL-版本"><a href="#设置默认-WSL-版本" class="headerlink" title="设置默认 WSL 版本"></a>设置默认 WSL 版本</h6><p>若要将默认版本设置为 WSL 1 或 WSL 2，请将 <Version> 替换为数字 1 或 2，表示对于安装新的 Linux 发行版，你希望默认使用哪个版本的 WSL。 例如，wsl –set-default-version 2。 比较 WSL 1 和 WSL 2。 WSL 2 仅在 Windows 11 或 Windows 10 版本 1903、内部版本 18362 或更高版本中可用。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--set-default-version</span> &lt;Version&gt;<br></code></pre></td></tr></table></figure><h6 id="设置默认-Linux-发行版"><a href="#设置默认-Linux-发行版" class="headerlink" title="设置默认 Linux 发行版"></a>设置默认 Linux 发行版</h6><p>若要设置 WSL 命令将用于运行的默认 Linux 发行版，请将 <Distribution Name> 替换为你首选的 Linux 发行版的名称。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--set-default</span> &lt;Distribution Name&gt;<br></code></pre></td></tr></table></figure><h6 id="将目录更改为主页"><a href="#将目录更改为主页" class="headerlink" title="将目录更改为主页"></a>将目录更改为主页</h6><p>~ 可与 wsl 一起使用，以在用户的主目录中启动。 若要在 WSL 命令提示符中从任何目录跳回到主目录，可使用命令 cd ~。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl ~<br></code></pre></td></tr></table></figure><h6 id="通过-PowerShell-或-CMD-运行特定的-Linux-发行版"><a href="#通过-PowerShell-或-CMD-运行特定的-Linux-发行版" class="headerlink" title="通过 PowerShell 或 CMD 运行特定的 Linux 发行版"></a>通过 PowerShell 或 CMD 运行特定的 Linux 发行版</h6><p>若要通过特定用户运行特定 Linux 发行版，请将 <Distribution Name> 替换为你首选的 Linux 发行版的名称（例如 Debian），将 <User Name> 替换为现有用户的名称（例如 root）。 如果 WSL 发行版中不存在该用户，你将会收到一个错误。 若要输出当前用户名，请使用 whoami 命令。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--distribution</span> &lt;Distribution Name&gt; <span class="hljs-literal">--user</span> &lt;User Name&gt;<br></code></pre></td></tr></table></figure><h6 id="更新-WSL"><a href="#更新-WSL" class="headerlink" title="更新 WSL"></a>更新 WSL</h6><p>将 WSL 版本更新到最新版本。 选项包括：</p><ul><li>–web-download：从 GitHub 而不是 Microsoft Store 下载最新更新。</li></ul><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--update</span><br></code></pre></td></tr></table></figure><h6 id="检查-WSL-状态"><a href="#检查-WSL-状态" class="headerlink" title="检查 WSL 状态"></a>检查 WSL 状态</h6><p>查看有关 WSL 配置的常规信息，例如默认发行版类型、默认发行版和内核版本。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--status</span><br></code></pre></td></tr></table></figure><h6 id="检查-WSL-版本"><a href="#检查-WSL-版本" class="headerlink" title="检查 WSL 版本"></a>检查 WSL 版本</h6><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--version</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>wsl入门</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>window 平台 git 配置多个账号的 ssh-key</title>
     <link href="/2023/08/02/window-%E5%B9%B3%E5%8F%B0-git-%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E8%B4%A6%E5%8F%B7%E7%9A%84-ssh-key/"/>
     <url>/2023/08/02/window-%E5%B9%B3%E5%8F%B0-git-%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E8%B4%A6%E5%8F%B7%E7%9A%84-ssh-key/</url>
@@ -80,6 +99,31 @@
   
   
   <entry>
+    <title>基于SpringBoot+Vue的学生选课管理系统</title>
+    <link href="/2023/08/01/springboot+vue%E5%AD%A6%E7%94%9F%E9%80%89%E8%AF%BE%E7%B3%BB%E7%BB%9F/"/>
+    <url>/2023/08/01/springboot+vue%E5%AD%A6%E7%94%9F%E9%80%89%E8%AF%BE%E7%B3%BB%E7%BB%9F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="基于SpringBoot-Vue的学生选课管理系统"><a href="#基于SpringBoot-Vue的学生选课管理系统" class="headerlink" title="基于SpringBoot+Vue的学生选课管理系统"></a>基于SpringBoot+Vue的学生选课管理系统</h1><h4 id="1、项目介绍"><a href="#1、项目介绍" class="headerlink" title="1、项目介绍"></a>1、项目介绍</h4><p>基于SpringBoot+Vue的学生选课管理系统采用前后端分离的架构方式，系统分为管理员、老师、学生等三种角色， 权限分配如下</p><p>管理员拥有所有权限:</p><ul><li>学生管理：可以对所有学生进行管理操作（新增学生、修改学生、删除学生）</li><li>教师管理：可以对所有教师进行管理操作（新增教师、修改教师、删除教师）</li><li>课程管理：可以对所有课程进行管理操作（新增课程、修改课程、删除课程）</li><li>开课表管理：对已开课进行管理（删除开课，搜索）</li><li>学生成绩管理：查询所有学生成绩，成绩录入等操作</li></ul><p>教师拥有部分权限</p><ul><li>教师编辑：编辑教师本人的信息</li><li>课程设置：查看自己开设的课程，选择课程并开课</li><li>教师成绩管理：可以查看并录入学生成绩</li></ul><p>学生拥有部分权限</p><ul><li>学生编辑：编辑本人的信息</li><li>选课管理：学生可以进行选课，以及对已选则的课表进行查看</li><li>学生成绩管理：查询学生本人的成绩</li></ul><h4 id="2、技术选型"><a href="#2、技术选型" class="headerlink" title="2、技术选型"></a>2、技术选型</h4><p>项目运行环境：mysql5.7 + idea + node + windows10</p><p>服务端技术选型：SpringBoot + Mybatis + mysql</p><p>前端技术选型及js库：Vue + ElementUI + axios</p><h4 id="3、成果展示"><a href="#3、成果展示" class="headerlink" title="3、成果展示"></a>3、成果展示</h4><ul><li>登陆界面</li></ul><p><a href="https://imgse.com/i/pCmu9un"><img src="https://s1.ax1x.com/2023/06/13/pCmu9un.png" alt="pCmu9un.png"></a></p><ul><li>系统管理员登陆界面</li></ul><p><a href="https://imgse.com/i/pCmuCBq"><img src="https://s1.ax1x.com/2023/06/13/pCmuCBq.png" alt="pCmuCBq.png"></a></p><ul><li>教师登陆界面</li></ul><p><a href="https://imgse.com/i/pCmnzcj"><img src="https://s1.ax1x.com/2023/06/13/pCmnzcj.png" alt="pCmnzcj.png"></a></p><ul><li>学生登陆界面</li></ul><p><a href="https://imgse.com/i/pCmu9un"><img src="https://s1.ax1x.com/2023/06/13/pCmu9un.png" alt="pCmu9un.png"></a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>JavaWeb</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>springboot+vue</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>网上书城项目</title>
     <link href="/2023/08/01/%E5%8F%AE%E5%BD%93%E4%B9%A6%E5%9F%8E/"/>
     <url>/2023/08/01/%E5%8F%AE%E5%BD%93%E4%B9%A6%E5%9F%8E/</url>
@@ -97,56 +141,6 @@
     <tags>
       
       <tag>SSM</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>图书管理系统</title>
-    <link href="/2023/08/01/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
-    <url>/2023/08/01/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
-    
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>这个项目是一个简单的图书管理系统，其中由三种角色：系统管理员、管理员、用户。三种角色都有对应权限，其中：</p><ul><li>系统管理员：对用户、书籍和类别的增删改查。</li><li>管理员：对借书和还书申请处理。</li><li>用户：对书籍的查看和借阅以及归还操作。</li></ul><h1 id="使用技术"><a href="#使用技术" class="headerlink" title="使用技术"></a>使用技术</h1><p>后端：springboot、mysql、mybatis-plus。</p><p>前端：javascript、css3、html5、bootstrap。</p><h1 id="账户登录"><a href="#账户登录" class="headerlink" title="账户登录"></a>账户登录</h1><p>登录账户</p><ul><li>系统管理员账户：admin 。密码：123</li><li>管理员账户：tom.密码：123</li><li>用户账户：lisi.密码：123123</li></ul><h1 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h1><h2 id="1、运行环境和所需工具"><a href="#1、运行环境和所需工具" class="headerlink" title="1、运行环境和所需工具"></a>1、运行环境和所需工具</h2><ul><li>编译器：IntelliJ IDEA</li><li>项目构建工具：Maven</li><li>数据库：Mysql</li><li>JDK版本：jdk1.8、</li></ul><h2 id="2、初始化项目"><a href="#2、初始化项目" class="headerlink" title="2、初始化项目"></a>2、初始化项目</h2><ul><li>在你的Mysql中，创建一个数据库名称为 library的数据库，并导入我提供的 .sql 文件。</li><li>进入src&#x2F;main&#x2F;resources修改application.yml配置文件,把数据库登录名和密码，改为你本地的。</li><li>使用 IntelliJ IDEA 导入项目，选择Maven项目选项，一路点击next就行。</li><li>在 IntelliJ IDEA 中，运行SpringBoot启动类。</li><li>运行</li></ul><p><a href="https://imgse.com/i/pCeZ32n"><img src="https://s1.ax1x.com/2023/06/12/pCeZ32n.png" alt="pCeZ32n.png"></a></p><ul><li>系统管理员界面</li></ul><p><a href="https://imgse.com/i/pCeZlCj"><img src="https://s1.ax1x.com/2023/06/12/pCeZlCj.png" alt="pCeZlCj.png"></a></p><ul><li>管理员界面</li></ul><p><a href="https://imgse.com/i/pCeZ18s"><img src="https://s1.ax1x.com/2023/06/12/pCeZ18s.png" alt="pCeZ18s.png"></a></p><ul><li>用户界面</li></ul><p><a href="https://imgse.com/i/pCeZM5Q"><img src="https://s1.ax1x.com/2023/06/12/pCeZM5Q.png" alt="pCeZM5Q.png"></a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>JavaWeb</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>springboot+bootstrap</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>基于SpringBoot+Vue的学生选课管理系统</title>
-    <link href="/2023/08/01/springboot+vue%E5%AD%A6%E7%94%9F%E9%80%89%E8%AF%BE%E7%B3%BB%E7%BB%9F/"/>
-    <url>/2023/08/01/springboot+vue%E5%AD%A6%E7%94%9F%E9%80%89%E8%AF%BE%E7%B3%BB%E7%BB%9F/</url>
-    
-    <content type="html"><![CDATA[<h1 id="基于SpringBoot-Vue的学生选课管理系统"><a href="#基于SpringBoot-Vue的学生选课管理系统" class="headerlink" title="基于SpringBoot+Vue的学生选课管理系统"></a>基于SpringBoot+Vue的学生选课管理系统</h1><h4 id="1、项目介绍"><a href="#1、项目介绍" class="headerlink" title="1、项目介绍"></a>1、项目介绍</h4><p>基于SpringBoot+Vue的学生选课管理系统采用前后端分离的架构方式，系统分为管理员、老师、学生等三种角色， 权限分配如下</p><p>管理员拥有所有权限:</p><ul><li>学生管理：可以对所有学生进行管理操作（新增学生、修改学生、删除学生）</li><li>教师管理：可以对所有教师进行管理操作（新增教师、修改教师、删除教师）</li><li>课程管理：可以对所有课程进行管理操作（新增课程、修改课程、删除课程）</li><li>开课表管理：对已开课进行管理（删除开课，搜索）</li><li>学生成绩管理：查询所有学生成绩，成绩录入等操作</li></ul><p>教师拥有部分权限</p><ul><li>教师编辑：编辑教师本人的信息</li><li>课程设置：查看自己开设的课程，选择课程并开课</li><li>教师成绩管理：可以查看并录入学生成绩</li></ul><p>学生拥有部分权限</p><ul><li>学生编辑：编辑本人的信息</li><li>选课管理：学生可以进行选课，以及对已选则的课表进行查看</li><li>学生成绩管理：查询学生本人的成绩</li></ul><h4 id="2、技术选型"><a href="#2、技术选型" class="headerlink" title="2、技术选型"></a>2、技术选型</h4><p>项目运行环境：mysql5.7 + idea + node + windows10</p><p>服务端技术选型：SpringBoot + Mybatis + mysql</p><p>前端技术选型及js库：Vue + ElementUI + axios</p><h4 id="3、成果展示"><a href="#3、成果展示" class="headerlink" title="3、成果展示"></a>3、成果展示</h4><ul><li>登陆界面</li></ul><p><a href="https://imgse.com/i/pCmu9un"><img src="https://s1.ax1x.com/2023/06/13/pCmu9un.png" alt="pCmu9un.png"></a></p><ul><li>系统管理员登陆界面</li></ul><p><a href="https://imgse.com/i/pCmuCBq"><img src="https://s1.ax1x.com/2023/06/13/pCmuCBq.png" alt="pCmuCBq.png"></a></p><ul><li>教师登陆界面</li></ul><p><a href="https://imgse.com/i/pCmnzcj"><img src="https://s1.ax1x.com/2023/06/13/pCmnzcj.png" alt="pCmnzcj.png"></a></p><ul><li>学生登陆界面</li></ul><p><a href="https://imgse.com/i/pCmu9un"><img src="https://s1.ax1x.com/2023/06/13/pCmu9un.png" alt="pCmu9un.png"></a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>JavaWeb</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Springboot+vue</tag>
       
     </tags>
     
@@ -180,6 +174,31 @@
   
   
   <entry>
+    <title>图书管理系统</title>
+    <link href="/2023/08/01/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
+    <url>/2023/08/01/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>这个项目是一个简单的图书管理系统，其中由三种角色：系统管理员、管理员、用户。三种角色都有对应权限，其中：</p><ul><li>系统管理员：对用户、书籍和类别的增删改查。</li><li>管理员：对借书和还书申请处理。</li><li>用户：对书籍的查看和借阅以及归还操作。</li></ul><h1 id="使用技术"><a href="#使用技术" class="headerlink" title="使用技术"></a>使用技术</h1><p>后端：springboot、mysql、mybatis-plus。</p><p>前端：javascript、css3、html5、bootstrap。</p><h1 id="账户登录"><a href="#账户登录" class="headerlink" title="账户登录"></a>账户登录</h1><p>登录账户</p><ul><li>系统管理员账户：admin 。密码：123</li><li>管理员账户：tom.密码：123</li><li>用户账户：lisi.密码：123123</li></ul><h1 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h1><h2 id="1、运行环境和所需工具"><a href="#1、运行环境和所需工具" class="headerlink" title="1、运行环境和所需工具"></a>1、运行环境和所需工具</h2><ul><li>编译器：IntelliJ IDEA</li><li>项目构建工具：Maven</li><li>数据库：Mysql</li><li>JDK版本：jdk1.8、</li></ul><h2 id="2、初始化项目"><a href="#2、初始化项目" class="headerlink" title="2、初始化项目"></a>2、初始化项目</h2><ul><li>在你的Mysql中，创建一个数据库名称为 library的数据库，并导入我提供的 .sql 文件。</li><li>进入src&#x2F;main&#x2F;resources修改application.yml配置文件,把数据库登录名和密码，改为你本地的。</li><li>使用 IntelliJ IDEA 导入项目，选择Maven项目选项，一路点击next就行。</li><li>在 IntelliJ IDEA 中，运行SpringBoot启动类。</li><li>运行</li></ul><p><a href="https://imgse.com/i/pCeZ32n"><img src="https://s1.ax1x.com/2023/06/12/pCeZ32n.png" alt="pCeZ32n.png"></a></p><ul><li>系统管理员界面</li></ul><p><a href="https://imgse.com/i/pCeZlCj"><img src="https://s1.ax1x.com/2023/06/12/pCeZlCj.png" alt="pCeZlCj.png"></a></p><ul><li>管理员界面</li></ul><p><a href="https://imgse.com/i/pCeZ18s"><img src="https://s1.ax1x.com/2023/06/12/pCeZ18s.png" alt="pCeZ18s.png"></a></p><ul><li>用户界面</li></ul><p><a href="https://imgse.com/i/pCeZM5Q"><img src="https://s1.ax1x.com/2023/06/12/pCeZM5Q.png" alt="pCeZM5Q.png"></a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>JavaWeb</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>springboot+bootstrap</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>高校宿舍管理系统</title>
     <link href="/2023/08/01/%E9%AB%98%E6%A0%A1%E5%AE%BF%E8%88%8D%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
     <url>/2023/08/01/%E9%AB%98%E6%A0%A1%E5%AE%BF%E8%88%8D%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
@@ -196,7 +215,7 @@
     
     <tags>
       
-      <tag>Springboot+vue</tag>
+      <tag>springboot+vue</tag>
       
     </tags>
     
