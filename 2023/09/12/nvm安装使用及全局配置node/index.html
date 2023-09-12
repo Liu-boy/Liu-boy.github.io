@@ -1,0 +1,695 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="lwp">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="nvm安装使用及全局配置node一、nvm是什么？nvm是一个node的版本管理工具，可以简单操作node版本的切换、安装、查看。。。等等，与npm不同的是，npm是依赖包的管理工具。 二、nvm的安装。1.windows包下载地址：下载nvm安装包，下载地址：https:&#x2F;&#x2F;github.com&#x2F;coreybutler&#x2F;nvm-windows&#x2F;releases&#x2F;tag&#x2F;1.1.11   双击安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nvm安装使用及全局配置node">
+<meta property="og:url" content="http://example.com/2023/09/12/nvm%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AEnode/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="nvm安装使用及全局配置node一、nvm是什么？nvm是一个node的版本管理工具，可以简单操作node版本的切换、安装、查看。。。等等，与npm不同的是，npm是依赖包的管理工具。 二、nvm的安装。1.windows包下载地址：下载nvm安装包，下载地址：https:&#x2F;&#x2F;github.com&#x2F;coreybutler&#x2F;nvm-windows&#x2F;releases&#x2F;tag&#x2F;1.1.11   双击安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="d:\Hexo\hexoblog\source\static\images\13658013-1cfea1451ab8addb.png">
+<meta property="article:published_time" content="2023-09-12T02:34:22.000Z">
+<meta property="article:modified_time" content="2023-09-12T02:51:30.503Z">
+<meta property="article:author" content="lwp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="d:\Hexo\hexoblog\source\static\images\13658013-1cfea1451ab8addb.png">
+  
+  
+  
+  <title>nvm安装使用及全局配置node - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>lwp的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links">
+                <i class="iconfont icon-links-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories">
+                <i class="iconfont icon-categories-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives">
+                <i class="iconfont icon-archives-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="nvm安装使用及全局配置node"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-12 10:34" pubdate>
+          星期二, 九月 12日 2023, 10:34 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">nvm安装使用及全局配置node</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="nvm安装使用及全局配置node"><a href="#nvm安装使用及全局配置node" class="headerlink" title="nvm安装使用及全局配置node"></a>nvm安装使用及全局配置node</h1><h4 id="一、nvm是什么？"><a href="#一、nvm是什么？" class="headerlink" title="一、nvm是什么？"></a>一、nvm是什么？</h4><p>nvm是一个node的版本管理工具，可以简单操作node版本的切换、安装、查看。。。等等，与npm不同的是，npm是依赖包的管理工具。</p>
+<h4 id="二、nvm的安装。"><a href="#二、nvm的安装。" class="headerlink" title="二、nvm的安装。"></a>二、nvm的安装。</h4><h5 id="1-windows包下载地址："><a href="#1-windows包下载地址：" class="headerlink" title="1.windows包下载地址："></a>1.windows包下载地址：</h5><p>下载nvm安装包，下载地址：<a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases/tag/1.1.11">https://github.com/coreybutler/nvm-windows/releases/tag/1.1.11</a></p>
+<p><img src="D:\Hexo\hexoblog\source\static\images\13658013-1cfea1451ab8addb.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li><h5 id="双击安装文件-nvm-setup-exe文件进行安装："><a href="#双击安装文件-nvm-setup-exe文件进行安装：" class="headerlink" title="双击安装文件 nvm-setup.exe文件进行安装："></a>双击安装文件 nvm-setup.exe文件进行安装：</h5></li>
+</ol>
+<h6 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h6><p>（注意这里：默认安装到C盘，可以修改地址，之后就不用配置环境变量了）</p>
+<p>如果安装到D盘，则需要配置相对应的环境，如图：（输入相对应的文件位置）  注意：选择的地址不能含有中文或者空格</p>
+<h6 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h6><p>找到nvm文件位置，点开setting</p>
+<p>然后在它后面输入以下代码：（这是配置镜像源）</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">node_mirror: https:<span class="hljs-regexp">//</span>npm.taobao.org<span class="hljs-regexp">/mirrors/</span>node/<br><br>npm_mirror: https:<span class="hljs-regexp">//</span>npm.taobao.org<span class="hljs-regexp">/mirrors/</span>npm/<br></code></pre></td></tr></table></figure>
+
+<h4 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h4><h5 id="1-先卸载之前的node-js，保证卸干净"><a href="#1-先卸载之前的node-js，保证卸干净" class="headerlink" title="1.先卸载之前的node.js，保证卸干净"></a>1.先卸载之前的node.js，保证卸干净</h5><h5 id="四、nvm的一些命令"><a href="#四、nvm的一些命令" class="headerlink" title="四、nvm的一些命令"></a>四、nvm的一些命令</h5><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">nvm命令行操作命令<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">1,</span>nvm nvm list 是查找本电脑上所有的node版本<br><br>- nvm list 查看已经安装的版本<br><br>- nvm list installed 查看已经安装的版本<br><br>- nvm list available 查看网络可以安装的版本<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">2,</span>nvm install 安装最新版本nvm<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">3,</span>nvm use &lt;version&gt; ## 切换使用指定的版本node<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">4,</span>nvm ls 列出所有版本<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">5,</span>nvm current显示当前版本<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">6,</span>nvm alias &lt;name&gt; &lt;version&gt; ## 给不同的版本号添加别名<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">7,</span>nvm unalias &lt;name&gt; ## 删除已定义的别名<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">8,</span>nvm reinstall-packages &lt;version&gt; ## 在当前版本node环境下，重新全局安装指定版本号的npm包<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">9,</span>nvm on 打开nodejs控制<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">10,</span>nvm off 关闭nodejs控制<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">11,</span>nvm proxy 查看设置与代理<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">12,</span>nvm node_mirror [url] 设置或者查看setting.txt中的node_mirror，如果不设置的默认是 https://nodejs.org/dist/<br><br><span class="hljs-title">　　nvm npm_mirror [url] 设置或者查看setting.txt中的npm_mirror,如果不设置的话默认的是： https:</span>//github.com/npm/npm/archive/.<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">13,</span>nvm uninstall &lt;version&gt; 卸载制定的版本<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">14,</span>nvm use [version] [arch] 切换制定的node版本和位数<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">15,</span>nvm root [path] 设置和查看root路径<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">16,</span>nvm version 查看当前的版本<br></code></pre></td></tr></table></figure>
+
+<h5 id="五、全局配置node"><a href="#五、全局配置node" class="headerlink" title="五、全局配置node"></a>五、全局配置node</h5><h6 id="1-配置node的缓存全局仓库"><a href="#1-配置node的缓存全局仓库" class="headerlink" title="1.配置node的缓存全局仓库"></a>1.配置node的缓存全局仓库</h6><p>在安装node的文件夹下新建两个文件夹；node_cache(缓存文件夹)node_global(全局仓库文件夹)</p>
+<p>然后再命令行输入</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">npm<span class="hljs-built_in"> config </span><span class="hljs-built_in">set</span><span class="hljs-built_in"> prefix </span>“D:\dev\nodejs\node_global”<br><br>npm<span class="hljs-built_in"> config </span><span class="hljs-built_in">set</span> cache “D:\dev\nodejs\node_cache”<br></code></pre></td></tr></table></figure>
+
+<h6 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h6><p>安装好的node会放在nvm里面，当nvm use node版本后，nodejs里面的node.exe会被之前安装的替换。</p>
+<p>接下来设置电脑环境变量，右键“我的电脑”&#x3D;》属性&#x3D;》高级系统设置&#x3D;》环境变量 进入以下环境变量对话框，</p>
+<p>在【系统变量】新建环境变量NODE_PATH:D:\dev\nodejs\node_global\node_modules；</p>
+<p>修改【用户变量】中的path变量，将C:\Users\hua\AppData\Roaming\npm修改为D:\dev\nodejs\node_global;</p>
+<p>没有npm的配置的话直接加到最后面。</p>
+<h6 id="3-测试-配置淘宝镜像和cnpm"><a href="#3-测试-配置淘宝镜像和cnpm" class="headerlink" title="3.测试 配置淘宝镜像和cnpm"></a>3.测试 配置淘宝镜像和cnpm</h6><p>下载cnpm：npm i cnpm -g –registry&#x3D;<a target="_blank" rel="noopener" href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></p>
+<p>配置好之后可以npm config get 查看配置信息</p>
+<p>当npm v8+ 时，安装依赖包会报：Unexpected token ‘.’ 错</p>
+<p><a target="_blank" rel="noopener" href="https://www.jb51.net/article/257055.htm">https://www.jb51.net/article/257055.htm</a> 有解释和解决方法</p>
+<p>node换回低版本14.20.0（npm -v 6.14.17）依赖包是可以安装的，原因在于当前nvm版本过低</p>
+<p>当前nvm -v 1.1.7</p>
+<p>去下载最新版nvm解决以上问题</p>
+<p>nvm下载地址：<a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a></p>
+<p>重新下载了nvm v1.1.9之后安装，按以上步骤安装完之后</p>
+<p>nvm use 18.10.0 报乱码错误：</p>
+<p>排除安装目录存在空格的情况，</p>
+<p>输入chcp 65001 查看乱码的内容显示node目录不为空，是因为我先建了node_cache和node_global</p>
+<p>解决：删除以上两个文件夹，重新nvm use 18.10.8</p>
+<p>又出现要管理员权限才能use</p>
+<p>然后又cmd以管理员身份运行</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>nvm安装使用及全局配置node</div>
+      <div>http://example.com/2023/09/12/nvm安装使用及全局配置node/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>lwp</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%E9%82%A3%E4%B9%88%E5%A4%9A%EF%BC%8C%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9Fnpm%E3%80%81yarn-%E5%92%8C-pnpm-%E4%B8%89%E8%80%85%E6%AF%94%E8%BE%83%E5%8F%8A%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3%EF%BC%81/" title="包管理工具那么多，怎么选？npm、yarn 和 pnpm 三者比较及使用详解！">
+                        <span class="hidden-mobile">包管理工具那么多，怎么选？npm、yarn 和 pnpm 三者比较及使用详解！</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Y4dE7jm8EyfB266vIOdwCX7R-gzGzoHsz","appKey":"CPErJpNU82mt1m2t9bxCOVZk","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"el":null},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
