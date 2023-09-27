@@ -16,19 +16,21 @@
   <meta name="author" content="lwp">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="若依框架分离版源码详解">
-<meta property="og:url" content="http://example.com/2023/09/25/%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E5%88%86%E7%A6%BB%E7%89%88%E6%BA%90%E7%A0%81%E8%AF%A6%E8%A7%A3/index.html">
+    <meta name="description" content="Windows10关闭占用端口号的进程一、Windows+R输入cmd回车，打开控制台，使用查看指定端口命令：netstat -ano | findstr 端口号 12netstat -ano | findstr 端口号  查看端口时可能会出现以上两种情况：一种是LISTENING，另一种是TIME_WAIT ； 当参数为 TIME_WAIT时，表示占用此端口的那个进程正在改变状态，稍等一下可能这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows关闭已经占用端口号">
+<meta property="og:url" content="http://example.com/2023/09/27/windows%E5%85%B3%E9%97%AD%E5%B7%B2%E7%BB%8F%E5%8D%A0%E7%94%A8%E7%AB%AF%E5%8F%A3%E5%8F%B7/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Windows10关闭占用端口号的进程一、Windows+R输入cmd回车，打开控制台，使用查看指定端口命令：netstat -ano | findstr 端口号 12netstat -ano | findstr 端口号  查看端口时可能会出现以上两种情况：一种是LISTENING，另一种是TIME_WAIT ； 当参数为 TIME_WAIT时，表示占用此端口的那个进程正在改变状态，稍等一下可能这">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-25T10:00:38.000Z">
-<meta property="article:modified_time" content="2023-09-25T10:00:38.312Z">
+<meta property="article:published_time" content="2023-09-27T01:51:43.000Z">
+<meta property="article:modified_time" content="2023-09-27T01:59:10.515Z">
 <meta property="article:author" content="lwp">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>若依框架分离版源码详解 - Hexo</title>
+  <title>windows关闭已经占用端口号 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +208,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="若依框架分离版源码详解"></span>
+            <span id="subtitle" data-typed-text="windows关闭已经占用端口号"></span>
           
         </div>
 
@@ -217,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-25 18:00" pubdate>
-          星期一, 九月 25日 2023, 6:00 晚上
+        <time datetime="2023-09-27 09:51" pubdate>
+          星期三, 九月 27日 2023, 9:51 上午
         </time>
       </span>
     
@@ -230,7 +232,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          0 字
+          394 字
         
       </span>
     
@@ -242,7 +244,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -279,12 +281,26 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">若依框架分离版源码详解</h1>
+            <h1 id="seo-header">windows关闭已经占用端口号</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="Windows10关闭占用端口号的进程"><a href="#Windows10关闭占用端口号的进程" class="headerlink" title="Windows10关闭占用端口号的进程"></a>Windows10关闭占用端口号的进程</h1><p>一、Windows+R输入cmd回车，打开控制台，使用查看指定端口命令：netstat -ano | findstr 端口号</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c">netstat -ano <span class="hljs-string">| findstr 端口号</span><br><br></code></pre></td></tr></table></figure>
+
+<p>查看端口时可能会出现以上两种情况：一种是LISTENING，另一种是TIME_WAIT ； 当参数为 TIME_WAIT时，表示占用此端口的那个进程正在改变状态，稍等一下可能这个进程就结束了。参数为LISTENING 时，就需要手动关闭这个进程了，最后一个参数是这个进程的进程号</p>
+<p>二、关闭进程</p>
+<p>2.1 方式一：手动关闭进程，运行查看进程命令：tasklist | findstr 进程号</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c">tasklist <span class="hljs-string">| findstr 进程号</span><br><br></code></pre></td></tr></table></figure>
+
+<p>此方式是在任务管理器中通过进程名字来关闭</p>
+<p>2.2 方式二：执行此命令强制关闭指定进程号的进程，运行关闭进程命令：taskkill -PID 进程号 -F</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos"><span class="hljs-built_in">taskkill</span> -PID 进程号 -F<br></code></pre></td></tr></table></figure>
+
+
+
+
                 
               </div>
             
@@ -301,8 +317,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>若依框架分离版源码详解</div>
-      <div>http://example.com/2023/09/25/若依框架分离版源码详解/</div>
+      <div>windows关闭已经占用端口号</div>
+      <div>http://example.com/2023/09/27/windows关闭已经占用端口号/</div>
     </div>
     <div class="license-meta">
       
@@ -314,7 +330,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月25日</div>
+          <div>2023年9月27日</div>
         </div>
       
       
@@ -346,18 +362,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/27/windows%E5%85%B3%E9%97%AD%E5%B7%B2%E7%BB%8F%E5%8D%A0%E7%94%A8%E7%AB%AF%E5%8F%A3%E5%8F%B7/" title="windows关闭已经占用端口号">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">windows关闭已经占用端口号</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/18/springboot%E5%90%8E%E7%AB%AF%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83/" title="springboot后端接口规范">
-                        <span class="hidden-mobile">springboot后端接口规范</span>
+                      <a href="/2023/09/25/%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E5%88%86%E7%A6%BB%E7%89%88%E6%BA%90%E7%A0%81%E8%AF%A6%E8%A7%A3/" title="若依框架分离版源码详解">
+                        <span class="hidden-mobile">若依框架分离版源码详解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
